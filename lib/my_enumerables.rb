@@ -1,6 +1,28 @@
 module Enumerable
   # Your code goes here
 
+  def my_all?
+
+    i = 0
+    x = true
+
+    while i < self.count
+
+      item = self[i]
+
+      if yield(item) == false
+        x = false
+        i = self.count
+      end
+
+      i += 1
+    
+    end
+        
+    return x
+
+  end
+
   def my_any?
     
     i = 0
