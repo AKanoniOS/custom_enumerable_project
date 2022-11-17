@@ -66,6 +66,33 @@ module Enumerable
     end
   end
 
+  def my_each_with_index
+    i = 0
+    while i < self.count
+      item = self[i]
+      index = i
+      yield(item, index)
+      i += 1
+    end
+    return self
+  end
+
+  def my_inject
+    
+  end
+
+  def my_map
+
+  end
+
+  def my_none?
+
+  end
+
+  def my_select
+
+  end
+
 end
 
 # You will first have to define my_each
