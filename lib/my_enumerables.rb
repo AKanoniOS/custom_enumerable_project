@@ -82,7 +82,14 @@ module Enumerable
   end
 
   def my_map
-
+    new_array = []
+    i = 0
+    while i < self.count
+      item = self[i]
+      new_array.push(yield(item))
+      i += 1
+    end
+    return new_array
   end
 
   def my_none?
