@@ -77,15 +77,15 @@ module Enumerable
     return self
   end
 
-  def my_inject(initial_value)
-    i = 0
-    total = initial_value
-    while i < self.count
-      item = self[i]
-      total = yield(item, total)
-      i += 1
-    end
-    return total
+  def my_inject(initial_value = 0) # create method and set initial value default to zero
+    i = 0                          # create iterator
+    total = initial_value          # set total value to initial_value
+    while i < self.count           # loop through entire array
+      item = self[i]               # grab current iteration's array value
+      total = yield(item, total)   # yield the total and item to the block for it to do something, set it equal to total
+      i += 1                       # increment the iterator
+    end                            #
+    return total                   # return total value
   end
 
   def my_map
