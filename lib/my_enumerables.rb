@@ -69,14 +69,14 @@ module Enumerable
   end
 
   def my_map
-    new_array = []   #create new empty array to push result to 
-    i = 0    #create iterator variable
-    while i < self.count   #loop over the entire array
-      item = self[i]    #grab this specific iteration's value from the array 
-      new_array.push(yield(item))    #do something to it with the code block and push the result to the new array
-      i += 1    #increment the iterator
+    new_array = []                # create new empty array to push result to 
+    i = 0                         # create iterator variable
+    while i < self.count          # loop over the entire array
+      item = self[i]              # grab this specific iteration's value from the array 
+      new_array.push(yield(item)) # do something to it with the code block and push the result to the new array
+      i += 1                      # increment the iterator
     end
-    return new_array   #return the new array
+    return new_array              # return the new array
   end
 
   def my_none?
@@ -94,7 +94,16 @@ module Enumerable
   end
 
   def my_select
-
+    i = 0
+    new_array = []
+    while i < self.count
+      item = self[i]
+      if yield(item)
+        new_array.push(item)
+      end
+      i += 1
+    end
+    return new_array
   end
 
 end
