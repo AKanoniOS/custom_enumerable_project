@@ -1,91 +1,71 @@
 module Enumerable
   # Your code goes here
 
-  def my_all?
+  def my_all?                     # check to see if all elements in enumerable meet criteria
+    i = 0                         # create iterator 
+    x = true                      # create bool value
+    while i < self.count          # iterate through entire enumerable object
+      item = self[i]              # grab current iteration's value
+      if yield(item) == false     # yield item to block and check if it returns false
+        x = false                 # if it does, set bool value to false and
+        i = self.count            # exit loop without checking any further values
+      end                         #
+      i += 1                      # increment iterator
+    end                           #
+    return x                      # return bool value
+  end                             #
 
-    i = 0
-    x = true
+  def my_any?                     # check to see if any elements meet criteria
+    i = 0                         # 
+    x = false                     # create bool value with default value false
+    while i < self.count          # 
+      item = self[i]              #
+      if yield(item)              # yield item to block, if block criteria is met, then
+        x = true                  # set bool to true and
+        i = self.count            # exit the loop without checking further values
+      end                         #
+      i += 1                      # increment iterator
+    end                           #
+    return x                      # return bool value
+  end                             #
 
-    while i < self.count
+  def my_count                    #
+    if block_given?               #
+      i = 0                       #
+      x = 0                       #
+      while i < self.count        #
+        item = self[i]            #
+        if yield(item)            #
+          x += 1                  #
+        end                       #
+        i += 1                    #
+      end                         #
+      return x                    #
+    else                          #
+      return self.size            #
+    end                           #
+  end                             #
 
-      item = self[i]
+  def my_each_with_index          #
+    i = 0                         #
+    while i < self.count          #
+      item = self[i]              #
+      index = i                   #
+      yield(item, index)          #
+      i += 1                      #
+    end                           #
+    return self                   #
+  end                             #
 
-      if yield(item) == false
-        x = false
-        i = self.count
-      end
-
-      i += 1
-    
-    end
-        
-    return x
-
-  end
-
-  def my_any?
-    
-    i = 0
-    x = false
-
-    while i < self.count
-
-      item = self[i]
-      
-      if yield(item)
-        x = true
-        i = self.count
-      else
-        x = false
-      end
-
-      i += 1
-
-    end
-
-    return x
-
-  end
-
-  def my_count
-    if block_given?
-      i = 0
-      x = 0
-      
-      while i < self.count
-        item = self[i]
-        if yield(item)
-          x += 1
-        end
-        i += 1
-      end
-
-      return x
-    else
-      return self.size
-    end
-  end
-
-  def my_each_with_index
-    i = 0
-    while i < self.count
-      item = self[i]
-      index = i
-      yield(item, index)
-      i += 1
-    end
-    return self
-  end
-
-  def my_inject(initial_value = 0) # create method and set initial value default to zero
-    i = 0                          # create iterator
-    total = initial_value          # set total value to initial_value
-    while i < self.count           # loop through entire array
-      item = self[i]               # grab current iteration's array value
-      total = yield(item, total)   # yield the total and item to the block for it to do something, set it equal to total
-      i += 1                       # increment the iterator
-    end                            #
-    return total                   # return total value
+  def my_inject(init_value = 0)   # create method and set initial value default to zero
+    i = 0                         # create iterator
+    total = init_value            # set total value to initial_value
+    while i < self.count          # iterate through entire enumerable object
+      item = self[i]              # grab current iteration's array value
+      total = yield(item, total)  # yield the total and item to the block for it to do something, set it equal to total
+      i += 1                      # increment the iterator
+    end                           #
+    return total                  # return total value
   end
 
   def my_map
